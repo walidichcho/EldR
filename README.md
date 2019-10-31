@@ -1,2 +1,2 @@
-# eldr
-Project Eldr - HB
+# EldR
+Project EldR - HB
