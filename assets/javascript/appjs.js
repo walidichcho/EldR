@@ -3,32 +3,54 @@ $(document).ready(function () {
     $(".user-selection").on("click", function (e) {
         e.preventDefault();
         let newEvent = $(this).val();
+        
+        let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=Boston"
 
-        let apiEventful = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://community-official-world-cup.p.rapidapi.com/wc/matches",
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "community-official-world-cup.p.rapidapi.com",
-                "x-rapidapi-key": "74744b3964msh9127df7e40e8745p1a94f6jsn609e28ab4ecb"
-            }
-        }
-        $.ajax(apiEventful).then(function (response) {
+        $.ajax({
+            url: apiYelp,
+            method: "GET",
+            headers: {
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": "Bearer VqZqgUX2qboPwa-PUY_ZeLscFpp23iDTB7vFF4T6PKTfjFXNSOM8hpsoJmdnKeMGbXiYPmAuZLzGNVEkuUImrrICCSouTCpoALIBX7gaYV8-vDj_OvlCAbWpKsLAXXYx"
+            },
+        }).then(function (response) {
+            let results = response.total
             console.log(response);
-            //let results = response
-
+            if (results > 0) {
+                $.each(response.businesses, function (i, item) {
+                    // Store each business's object in a variable
+                    let id = item.id;
+                    let alias = item.alias;
+                    let phone = item.display_phone;
+                    let image = item.image_url;
+                    let name = item.name;
+                    let rating = item.rating;
+                    let reviewcount = item.review_count;
+                    let latitude = item.coordinates.latitude;
+                    let longitude = item.coordinates.longitude;
+                    let address = item.location.address1;
+                    let city = item.location.city;
+                    let state = item.location.state;
+                    let zipcode = item.location.zip_code;
+                    let newRow = $("<tr>");
+                    newRow.append("<td>" + name + "</td>");
+                    newRow.append("<td>" + address + "</td>");
+                    newRow.append("<td>" + city + "</td>");
+                    newRow.append("<td>" + state + "</td>");
+                    newRow.append("<td>" + zipcode + "</td>");
+                    newRow.append("<td>" + phone + "</td>");
+                    newRow.append("<td>" + rating + "</td>");
+                    newRow.append("<td>" + reviewcount + "</td>");
+                    newRow.append("<td>" + latitude + "</td>");
+                    $("tbody").append(newRow);
+                });
+            }
+    
         });
     });
 
-    //create table rows
 
-    //let newRow = $("<tr>");
-    //newRow.append('<td>' + results.start_time + "</td>");
-    // newRow.append('<td>' + obj[newEvent].name + "</td>");
-    // newRow.append('<td>' + obj[newEvent].title + "</td>");
-    // newRow.append('<td>' + obj[newEvent].city + ", " + obj[newEvent].state + " " + obj[newEvent].zip + "</td>");
-    // newRow.append('<td><a href="#">' + obj[newEvent].website + '</td><a href="#">');
-    // $("tbody").append(newRow);
 
 });
