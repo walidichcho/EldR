@@ -57,6 +57,7 @@
                 Events </button>
         </div>
     </div>
+    <!-- filter search bar -->
         <div class="container">
             <div class ="row">
                 <div class="col-lg-12 filter-title">
@@ -66,7 +67,7 @@
             <div class ="row">
                 <form>
                     <div class="col-md-2 form-group">
-                        <!-- <label for="pwd">Category</label> -->
+                        <!-- category dropdown -->
                         <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
                             <option disable selected>Category</option>
                             <option value="nightlife">Nightlife</option>
@@ -75,8 +76,8 @@
                             <option value="events">Events</option>
                         </select>
                     </div>
+                        <!-- dropdown for city selection -->
                         <div class="col-md-2 form-group">
-                            <!-- <label for="pwd">City</label> -->
                             <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
                                 <option disable selected>City</option>
                                 <option value="Boston">Boston</option>
@@ -89,30 +90,32 @@
                                 <option value="Woburn">Woburn</option>
                             </select>
                         </div>
+                        <!-- keyword search filter -->
                         <div class="col-md-4 form-group">
-                            <!-- <label for="keywords">Keywords</label> -->
                                 <input type="text" class="form-control" id="keywords" placeholder="Keyword: e.g., Italian, art, dancing">
                         </div>
+                        <!-- <label for="start_date">Start date</label> -->
                         <div class="col-md-3 form-group">
-                            <!-- <label for="start_date">Start date</label> -->
                             <input type="date" class="form-control" id="start-date">
                         </div>
                         <div class="form-group col-md-1 justify-content-end">
-                            <button type="submit" id="submit-filter" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="submit-filter" class="btn">Submit</button>
                         </div>
                 </form>
             </div>
         </div>
-        </div>
+        <!-- map & sidebar -->
         <div class="row row-height">
             <!-- results panel-->
             <div class="col-lg-12">
                 <div class='sidebar'>
                     <div class='heading'>
+                        <!-- sidebar -->
                         <h1>Your results</h1>
                     </div>
                     <div id='listings' class='listings'></div>
                 </div>
+                <!-- map div -->
                 <div id='map' class='map pad2'>Map</div>
             </div>
         </div>

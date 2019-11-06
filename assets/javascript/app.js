@@ -1,5 +1,6 @@
 $(document).ready(function() { 
 
+// creating map variables
 let storesDyn = [];
 let newEvent = "dining";
 let phone;
@@ -13,52 +14,47 @@ let zipcode;
 let name;
 let center_long = 0;
 let center_lat = 0;
-let yelp = true;
 
+// setting today's date as the default search date
 let startDate = moment().format('YYYY-MM-DD');
-console.log(startDate);
-startDate = startDate.replace(/-/g, "");
-console.log(startDate);
+startDate = startDate.replace(/-/g, ""); // removes dashes for proper Eventful format
 
-// $("#start-date").hide();
-
-// $("#category-list").change(function(){
-//     $("#start-date").hide();
-//     let selection = $(this).val();
-//     if (selection === "events"){
-//       $("#start-date").show();
-//     } 
-//      else {
-//         $("#start-date").hide(); 
-//      }
-//   });
-
+// click event for sidebar buttons
 $(".user-selection").on("click", function (e) {
+    // resets logitude and latitude variables
     center_long = 0;
     center_lat = 0;
+    // clear the table
     $("#listings").html(" ");
     e.preventDefault();
+    // if user select 
     newEvent = $(this).val();
-    if (newEvent === "entertainment") {
+    // if the user selects "events" initially we add "art" as the keyword search term, just to populate the table for the first time
+    if (newEvent === "events") {
         newEvent = "art";
+        // the events button controls the Eventful API so this function launches the Eventful API
         eventfulSelected(newEvent);
     }
+    // if they choose one of the other 3 buttons it launches the Yelp API
     else {
         yelpSelected(newEvent);
     }
 
 });
 
+// this handles the filter click events
 $("#submit-filter").on("click", function (e) {
+    // clear the table
     $("#listings").html(" ");
     e.preventDefault();
+    // update the variables with the value of the button clicked
     city = $("#city-list").val();
     newEvent = $("#category-list").val();
     startDate = $("#start-date").val();
-    startDate = startDate.replace(/-/g, "");
+    startDate = startDate.replace(/-/g, ""); // remove dashes for proper Eventful format
     keywords = $("#keywords").val();
 
-    console.log("new event" + newEvent)
+    // create the Eventful API variable
     let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=Boston&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
 
   $.ajax({
@@ -70,18 +66,20 @@ $("#submit-filter").on("click", function (e) {
         "Access-Control-Allow-Origin": "*",
         "Authorization": "Bearer VqZqgUX2qboPwa-PUY_ZeLscFpp23iDTB7vFF4T6PKTfjFXNSOM8hpsoJmdnKeMGbXiYPmAuZLzGNVEkuUImrrICCSouTCpoALIBX7gaYV8-vDj_OvlCAbWpKsLAXXYx"
     },
-}).then(function (response) {
-    console.log(response);
-    response = JSON.parse(response);
-    console.log(response);
-    eventfulList(response)
-});
+
+    }).then(function (response) {
+        // Eventful returns a string so this turns it into an object
+        response = JSON.parse(response);
+        // launch the Eventful API
+        eventfulList(response)
+    });
 
 });
 
-
+// this is the Eventful function. I wasn't able to DRY it up because it's slightly different coming from the buttons vs. the filter
 function eventfulSelected(newEvent) {
-    console.log("new event" + newEvent)
+    // set the Eventful API variable. This helps with the CORS issue. We may be able to remove once we publish.
+
     let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=" + city + "&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
 
   $.ajax({
@@ -93,18 +91,19 @@ function eventfulSelected(newEvent) {
         "Access-Control-Allow-Origin": "*",
         "Authorization": "Bearer VqZqgUX2qboPwa-PUY_ZeLscFpp23iDTB7vFF4T6PKTfjFXNSOM8hpsoJmdnKeMGbXiYPmAuZLzGNVEkuUImrrICCSouTCpoALIBX7gaYV8-vDj_OvlCAbWpKsLAXXYx"
     },
-}).then(function (response) {
-    // console.log(response);
-    response = JSON.parse(response);
-    // console.log(response);
-    eventfulList(response)
-});
+
+    }).then(function (response) {
+        // turning the Eventful string into an object
+        response = JSON.parse(response);
+        eventfulList(response)
+    });
 
 }
 
+// this is the function for when someone selects Dining, Nightlife or Fitness
 function yelpSelected(newEvent) {
     console.log("new event" + newEvent)
-    // TA questions cors-anywhere.herokuapp.com
+    // Set the Yelp API variable. This helps with the CORS issue. We may be able to remove once we publish.
     let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=Boston";
 
   $.ajax({
@@ -116,24 +115,23 @@ function yelpSelected(newEvent) {
         "Access-Control-Allow-Origin": "*",
         "Authorization": "Bearer VqZqgUX2qboPwa-PUY_ZeLscFpp23iDTB7vFF4T6PKTfjFXNSOM8hpsoJmdnKeMGbXiYPmAuZLzGNVEkuUImrrICCSouTCpoALIBX7gaYV8-vDj_OvlCAbWpKsLAXXYx"
     },
-}).then(function (response) {
-    console.log(response);
+    
+    }).then(function (response) {
+        console.log(response);
 
-    yelpList(response)
-});
+        yelpList(response)
+    });
 
 }
 
-
+// this is the Yelp searcg function
 function yelpList(data) {
 
-
-    let results = data.total
     let item = data.businesses;
-
 
       for (let i = 0; i<7; i++) {
 
+            // updating the variables
             phone = item[i].display_phone;
             name = item[i].name;
             latitude = item[i].coordinates.latitude;
@@ -142,54 +140,49 @@ function yelpList(data) {
             city = item[i].location.city;
             state = item[i].location.state;
             zipcode = item[i].location.zip_code;
+            // creating center point for map
             center_long = parseFloat(center_long);
             center_lat = parseFloat(center_lat);
             center_long += parseFloat(longitude);
             center_lat += parseFloat(latitude);
-            // console.log("long " + longitude);
-            // console.log("centerlong " + center_long);
-            // console.log("lat " + latitude);
-            // console.log("centerlat " + center_lat);
 
-
-              storesDyn[i] = {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [
-                        longitude,
-                        latitude
-                      ]
-                    },
-                    "properties": {
-                      "name": name,
-                      "phoneFormatted": phone,
-                      "phone": phone,
-                      "address": address,
-                      "city": city,
-                      "country": "United States",
-                      "crossStreet": " ",
-                      "postalCode": zipcode,
-                      "state": state
-                    }
-                  }
+            // dynamic object created from API results
+            storesDyn[i] = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                    longitude,
+                    latitude
+                    ]
+                },
+                "properties": {
+                    "name": name,
+                    "phoneFormatted": phone,
+                    "phone": phone,
+                    "address": address,
+                    "city": city,
+                    "country": "United States",
+                    "crossStreet": " ",
+                    "postalCode": zipcode,
+                    "state": state
+                }
+                }
             };
 
+            // this does the math to create the latitude/longitude centerpoint 
             center_long = center_long/7;
             center_lat = center_lat/7;
-            // console.log("center long " + center_long);
-            // console.log("center lat " + center_lat);
 
-          let newStoresList = {
-          "type": "FeaturedCollection",
-          "features": storesDyn,
-          "center_long": center_long,
-          "center_lat": center_lat
+            // this creates the object in the format that the map likes                
+            let newStoresList = {
+            "type": "FeaturedCollection",
+            "features": storesDyn,
+            "center_long": center_long,
+            "center_lat": center_lat
         };
-        console.log("*********************");
-        console.log(newStoresList);
-        storesPass(newStoresList);
-        console.log("*********************");
+        // call the function that populates the map
+        loadMap(newStoresList);
     
     }
 
@@ -250,19 +243,13 @@ function yelpList(data) {
           "center_long": center_long,
           "center_lat": center_lat
         };
-        console.log("*********************");
-        console.log(newStoresList);
-        storesPass(newStoresList);
-        console.log("*********************");
 
+        loadMap(newStoresList);
     
     }
 
-
-function storesPass(newStoresList) {
-console.log("....................");
-console.log(newStoresList);
-console.log("....................");
+// BELOW IS EVERYTHING HAVE TO DO WITH THE MAP
+function loadMap(newStoresList) {
 
   // This will let you use the .remove() function later on
   if (!('remove' in Element.prototype)) {
@@ -275,10 +262,6 @@ console.log("....................");
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2aWRzaGF1Y2siLCJhIjoiY2syZjU4eWFjMGdvbjNvbW8wN3NjZTJxaSJ9.ZHwNa6cWqC0ZdkAKX6YYCQ';
   
-  center_lat = center_lat.toString();
-  center_long = center_long.toString();
-  console.log("center lat " + center_lat);
-  console.log("center long " + center_long);
   // This adds the map
   let map = new mapboxgl.Map({
     // container id specified in the HTML
@@ -286,17 +269,11 @@ console.log("....................");
     // style URL
     style: 'mapbox://styles/mapbox/light-v10',
     // initial position in [long, lat] format
-    // center: [-71.0589, 42.3601],
     center: [center_long, center_lat],
     // initial zoom
     zoom: 11,
     scrollZoom: true
   });
-
-    // driving directions
-    // map.addControl(new MapboxDirections({
-    //   accessToken: mapboxgl.accessToken
-    //   }), 'top-left');
 
   // enable map zoom controls
   map.addControl(new mapboxgl.NavigationControl());
@@ -355,8 +332,8 @@ stores = newStoresList;
         listing.classList.add('active');
 
     });
-  });
 
+  });
 
   function flyToStore(currentFeature) {
     map.flyTo({
@@ -426,8 +403,7 @@ stores = newStoresList;
   }
 };
 
-
-
+// this launches the map for the first time with defaul variables
 yelpSelected(newEvent);
 
 });
