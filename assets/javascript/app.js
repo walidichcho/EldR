@@ -1,19 +1,61 @@
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-
-<script>
-    
-  var firebaseConfig = {
-    apiKey: "AIzaSyB6nuz_M326fOPxo7-aWQfCMAqkxs3foqY",
-    authDomain: "elder-ec37d.firebaseapp.com",
-    databaseURL: "https://elder-ec37d.firebaseio.com",
-    projectId: "elder-ec37d",
-    storageBucket: "elder-ec37d.appspot.com",
-    messagingSenderId: "657890035204",
-    appId: "1:657890035204:web:a8eefca192ae4225e65751",
-    measurementId: "G-KS02S1HB4G"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
+$(document).ready(function() { 
+    const obj = {
+        nightlife : {
+            name: "Hard Rock Cafe",
+            title: "Dance-a-thon",
+            date: "Friday, Dec. 30, 2019",
+            address: "123 Brattle Street",
+            city: "Boston",
+            state: "MA",
+            zip: "02851",
+            phone: "617-555-1212", 
+            website: "http://www.hardrock.com"  
+        },
+        dining : {
+            name: "Shake Shack",
+            title: "Free Shakes",
+            date: "Wednesday, Nov. 30, 2019",
+            address: "666 Mockingbird Lane",
+            city: "Boston",
+            state: "MA",
+            zip: "02851",
+            phone: "617-555-1212",
+            website: "http://www.shackshack.com"   
+        },
+        fitness : {
+            name: "Planet Fitness",
+            title: "Sweating with the Oldies",
+            date: "Tuesday, Dec. 6, 2019",
+            address: "175 Northampton Street",
+            city: "Boston",
+            state: "MA",
+            zip: "02851",
+            phone: "617-555-1212",
+            website: "http://www.planetfitness.com"
+        },
+        entertainment : {
+            name: "Boston Common Theater",
+            title: "Dance-a-thon",
+            date: "Saturday, Jan. 15, 2020",
+            address: "22 Tremont Street",
+            city: "Boston",
+            state: "MA",
+            zip: "02851",
+            phone: "617-555-1212",
+            website: "http://www.loewstheaters.com"
+        }
+    }
+    $(".user-selection").on("click", function(e) {
+        e.preventDefault();
+        let newEvent = $(this).val();
+        console.log(obj[newEvent].name);
+        // create table rows
+        let newRow = $("<tr>");
+            newRow.append('<td>' + obj[newEvent].date + "</td>");
+            newRow.append('<td>' + obj[newEvent].name + "</td>");
+            newRow.append('<td>' + obj[newEvent].title + "</td>");
+            newRow.append('<td>' + obj[newEvent].city + ", " + obj[newEvent].state + " " + obj[newEvent].zip + "</td>");
+            newRow.append('<td><a href="#">' + obj[newEvent].website + '</td><a href="#">');
+        $("tbody").append(newRow);
+    });
+});
