@@ -53,10 +53,57 @@
             </button>
             <button type="submit" id="fitness" class="user-selection btn btn-info" value="fitness"> Fitness
             </button>
-            <button type="submit" id="entertainment" class="user-selection btn btn-info" value="entertainment">
-                Entertainment </button>
+            <button type="submit" id="events" class="user-selection btn btn-info" value="events">
+                Events </button>
         </div>
     </div>
+        <div class="container">
+            <div class ="row">
+                <div class="col-lg-12 filter-title">
+                    Refine your search
+                </div>
+            </div>
+            <div class ="row">
+                <form>
+                    <div class="col-md-2 form-group">
+                        <!-- <label for="pwd">Category</label> -->
+                        <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                            <option disable selected>Category</option>
+                            <option value="nightlife">Nightlife</option>
+                            <option value="dining">Dining</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                        <div class="col-md-2 form-group">
+                            <!-- <label for="pwd">City</label> -->
+                            <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                                <option disable selected>City</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Brookline">Brookline</option>
+                                <option value="Cambridge">Cambridge</option>
+                                <option value="Medford">Medford</option>
+                                <option value="Milton">Milton</option>
+                                <option value="Quincy">Quincy</option>
+                                <option value="Somerville">Somerville</option>
+                                <option value="Woburn">Woburn</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <!-- <label for="keywords">Keywords</label> -->
+                                <input type="text" class="form-control" id="keywords" placeholder="Keyword: e.g., Italian, art, dancing">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <!-- <label for="start_date">Start date</label> -->
+                            <input type="date" class="form-control" id="start-date">
+                        </div>
+                        <div class="form-group col-md-1 justify-content-end">
+                            <button type="submit" id="submit-filter" class="btn btn-primary">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+        </div>
         <div class="row row-height">
             <!-- results panel-->
             <div class="col-lg-12">

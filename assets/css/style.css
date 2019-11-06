@@ -194,6 +194,7 @@ body {
     border-radius: 3px 3px 0 0;
     font-weight: 700;
     margin-top: -15px;
+    font-size: 1.10rem
   }
   
   .mapboxgl-popup-content h4 {
@@ -201,6 +202,7 @@ body {
     display: block;
     padding: 10px;
     font-weight: 400;
+    font-size: 1.0rem
   }
   
   .mapboxgl-popup-content div {
@@ -238,3 +240,28 @@ body {
       /* background-color: green; */
   }
 
+  .form-group {
+      float: left;
+  }
+
+.container {
+    margin-top: 20px;
+}
+
+#submit-filter {
+    /* padding: 0px; */
+    margin: 0px;
+}
+
+.filter-title {
+    font-size: 24px;
+    padding: 20px;
+}
+
+/* #keywords {
+    width: 150%;
+} */
+
+#start-date {
+    margin-left: 10%;
+}
