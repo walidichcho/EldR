@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- load reset & local styles -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/table.css">
+
+    <!-- google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    
+    <!-- load bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>Train Scheduler</title>
+</head>
+<body>
+
+
+<!-- load jQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- load local javascript file -->
+<script type="text/javascript" src="assets/table.js"></script>
+<!-- load momentjs -->
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+<div class="container">
+    <!-- jumbotron -->
+    <div class="box">
+        <h1>EVENTS LIST</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- results panel-->
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Events</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Website</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- form panel-->
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Select</h3>
+                </div>
+                <div class="panel-body">
+                        <!-- <div id="alert">Arrival times update every 30 seconds</div>
+                        <div id="timer">.</div> -->
+                    <form>
+                        <!-- <div class="form-group">
+                            <label for="train-name">Train name</label>
+                            <input type="text" class="form-control" id="train-name" aria-describedby="emailHelp" placeholder="Orange Line">
+                        </div>
+                        <div class="form-group">
+                            <label for="train-destination">Destination</label>
+                            <input type="text" class="form-control" id="train-destination" placeholder="Boston">
+                        </div>
+                        <div class="form-group">
+                            <label for="first-train">First train (HH:MM - military time)</label>
+                            <input type="text" class="form-control" id="first-train" placeholder="14:30">
+                        </div>
+                        <div class="form-group">
+                            <label for="train-frequency">Frequency (min)</label>
+                            <input type="number" class="form-control" id="train-frequency" placeholder="25">
+                        </div> -->
+                        <button type="submit" id="nightlife" class="user-selection btn btn-primary" value="nightlife">Nightlife</button>
+                        <button type="submit" id="dining" class="user-selection btn btn-primary" value="dining">Dining</button>
+                        <button type="submit" id="fitness" class="user-selection btn btn-primary" value="fitness">Fitness</button>
+                        <button type="submit" id="entertainment" class="user-selection btn btn-primary" value="entertainment">Entertainment</button>
+
+                    </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    
+</body>
+</html>
