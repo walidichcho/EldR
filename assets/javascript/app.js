@@ -1,6 +1,6 @@
 $(document).ready(function() { 
 
-// creating map variables
+// create map variables
 let storesDyn = [];
 let newEvent = "dining";
 let phone;
@@ -26,6 +26,7 @@ $(".user-selection").on("click", function (e) {
     center_lat = 0;
     // clear the table
     $("#listings").html(" ");
+    $("#map").html(" ");
     e.preventDefault();
     // if user select 
     newEvent = $(this).val();
@@ -44,8 +45,14 @@ $(".user-selection").on("click", function (e) {
 
 // this handles the filter click events
 $("#submit-filter").on("click", function (e) {
+    $("#image-holder").html("<img src='assets/images/loading.gif'>");
+
+
+    // TODO: Use a setTimeout to run displayImage after 1 second.
+    // setTimeout(displayImage, 1000);
     // clear the table
     $("#listings").html(" ");
+    $("#map").html(" ");
     e.preventDefault();
     // update the variables with the value of the button clicked
     city = $("#city-list").val();
@@ -78,8 +85,8 @@ $("#submit-filter").on("click", function (e) {
 
 // this is the Eventful function. I wasn't able to DRY it up because it's slightly different coming from the buttons vs. the filter
 function eventfulSelected(newEvent) {
+    
     // set the Eventful API variable. This helps with the CORS issue. We may be able to remove once we publish.
-
     let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=" + city + "&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
 
   $.ajax({
@@ -102,7 +109,7 @@ function eventfulSelected(newEvent) {
 
 // this is the function for when someone selects Dining, Nightlife or Fitness
 function yelpSelected(newEvent) {
-    console.log("new event" + newEvent)
+
     // Set the Yelp API variable. This helps with the CORS issue. We may be able to remove once we publish.
     let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=Boston";
 
@@ -124,9 +131,10 @@ function yelpSelected(newEvent) {
 
 }
 
-// this is the Yelp searcg function
+// this is the Yelp search function
 function yelpList(data) {
 
+    $(".heading").html("<h1>" + newEvent + " near you</h1>");
     let item = data.businesses;
 
       for (let i = 0; i<7; i++) {
@@ -188,13 +196,14 @@ function yelpList(data) {
 
     function eventfulList(data) {
 
+        $(".heading").html("<h1>" + newEvent + " near you</h1>");
         let item = data.events;
         center_long = 0;
         center_lat = 0;
 
         for (let i = 0; i<7; i++) {
 
-            phone = "<a href=" + item.event[i].venue_url + ">Website</a>";
+            phone = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
             name = item.event[i].title;
             latitude = item.event[i].latitude;
             longitude = item.event[i].longitude;
@@ -206,8 +215,6 @@ function yelpList(data) {
             center_lat = parseFloat(center_lat);
             center_long += parseFloat(longitude);
             center_lat += parseFloat(latitude);
-            console.log("long " + longitude);
-            console.log("lat " + latitude);
 
               storesDyn[i] = {
                     "type": "Feature",
@@ -233,22 +240,23 @@ function yelpList(data) {
             };
             center_long = center_long/7;
             center_lat = center_lat/7;
-            console.log("center long " + center_long);
-            console.log("center lat " + center_lat);
-
 
           let newStoresList = {
           "type": "FeaturedCollection",
           "features": storesDyn,
-          "center_long": center_long,
-          "center_lat": center_lat
+          "center_long": center_long, // this if we want a dynamic longitude based on search results
+          "center_lat": center_lat  // this if we want a dynamic latitude based on search results
         };
 
+        // call the load map function with the dynamic locations list
         loadMap(newStoresList);
     
     }
 
-// BELOW IS EVERYTHING HAVE TO DO WITH THE MAP
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+// BELOW IS EVERYTHING HAVING TO DO WITH THE MAP FUNCTIONALITY //
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 function loadMap(newStoresList) {
 
   // This will let you use the .remove() function later on
@@ -269,7 +277,7 @@ function loadMap(newStoresList) {
     // style URL
     style: 'mapbox://styles/mapbox/light-v10',
     // initial position in [long, lat] format
-    center: [center_long, center_lat],
+    center: [-71.0589, 42.3601],
     // initial zoom
     zoom: 11,
     scrollZoom: true
@@ -351,7 +359,7 @@ stores = newStoresList;
           .setLngLat(currentFeature.geometry.coordinates)
           .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
             '<h4>' + currentFeature.properties.address + ' <br />' +
-            currentFeature.properties.city + ', ' + currentFeature.properties.state + ' ' + currentFeature.properties.postalCode + '<h4>')
+            currentFeature.properties.city + ', ' + currentFeature.properties.state + ' ' + currentFeature.properties.phone + '<h4>')
           .addTo(map);
   }
 
