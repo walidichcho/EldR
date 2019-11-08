@@ -15,11 +15,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* #nav-bar {
-    padding: 0px;
-    margin: 0px;
-} */
-
 html {
 
     box-sizing: border-box;
@@ -32,7 +27,7 @@ nav {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #60d2d5;
     display: grid;
     color: white;
     text-align: center;
@@ -78,6 +73,12 @@ h2 {
     
 }
 
+h6 {
+    padding: 10px;
+    font-size: 16px;
+    color: red;
+}
+
 /* BELOW ARE THE STYLES FOR THE MAP */
 
 h1 {
@@ -91,6 +92,7 @@ h1 {
 a {
     color: #404040;
     text-decoration: none;
+    cursor: pointer; /* keep this on merge, need it after I removed the href */
 }
 
 a:hover {
@@ -145,14 +147,14 @@ a:hover {
 
 .listings .item .title {
     display: block;
-    color: #00853e;
+    color: #60d2d5;
     font-weight: 700;
 }
 
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #8cc63f; }
+.listings .item .title:hover { color: #60d2d5; }
 
 .listings .item.active {
     background-color: #f8f8f8;
@@ -170,7 +172,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #00853e;
+    background: #60d2d5;
     border-radius: 0;
 }
 
@@ -200,7 +202,7 @@ a:hover {
 }
 
 .mapboxgl-popup-content h3 {
-    background: #91c949;
+    background: #60d2d5;
     color: #fff;
     margin: 0;
     display: block;
@@ -272,7 +274,7 @@ a:hover {
 }
 
 #start-date {
-    margin-left: 10%;
+    /* margin-left: 10%; */
 }
 /* not delete! */
 #vid {

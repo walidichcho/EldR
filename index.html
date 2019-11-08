@@ -19,8 +19,16 @@
     <!-- Moment.js Reference -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+
+    <!-- JS -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
+
+    <!-- local css -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
+    <!-- local javascript -->
     <script src="./assets/javascript/app.js" defer></script>
 
 </head>
@@ -44,84 +52,76 @@
     <div class="row">
         <div class="col-md-9">
             <video id="vid" width="1920" height="1080" loop autoplay muted>
-                <source src="./assets/images/video1.mov" type="video/mp4" />
-            </video>
+                    <!-- MP4 must be first for iPad! -->
+                    <!-- <source src="https://youtu.be/5fAJelLvlto" type="video/mp4" /> -->
+             </video>
+            <!-- <img src="./assets/images/banner2.png"> -->
         </div>
         <div class="col-md-1"></div>
-        <div id="aside-buttons" class="col-md-2 bg-info">
-            <button type="submit" id="nightlife" class="user-selection btn btn-info" value="nightlife"> Nightlife
-            </button>
-            <button type="submit" id="dining" class="user-selection btn btn-info" value="dining"> Dining
-            </button>
-            <button type="submit" id="fitness" class="user-selection btn btn-info" value="fitness"> Fitness
-            </button>
-            <button type="submit" id="events" class="user-selection btn btn-info" value="events">
-                Events </button>
-        </div>
     </div>
     <!-- filter search bar -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 filter-title">
-                Refine your search
+        <div class="container">
+            <div class ="row">
+                <div class="col-lg-12 filter-title">
+                    Refine your search
+                </div>
+            </div>
+            <div class ="row">
+                <form>
+                    <div class="col-md-2 form-group">
+                        <!-- category dropdown -->
+                        <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                            <option disable selected>Category</option>
+                            <option value="nightlife">Nightlife</option>
+                            <option value="dining">Dining</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="events">Events</option>
+                            <option value="medical">Medical</option>
+                        </select>
+                    </div>
+                            <!-- dropdown for city selection -->
+                            <div class="col-md-2 form-group">
+                            <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                                <option disable selected>City</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Brookline">Brookline</option>
+                                <option value="Cambridge">Cambridge</option>
+                                <option value="Medford">Medford</option>
+                                <option value="Milton">Milton</option>
+                                <option value="Quincy">Quincy</option>
+                                <option value="Somerville">Somerville</option>
+                                <option value="Woburn">Woburn</option>
+                            </select>
+                        </div>
+                        <!-- keyword search filter -->
+                        <div class="col-md-4 form-group">
+                                <input type="text" class="form-control" id="keywords" placeholder="Keyword: e.g., pizza, art, podiatrist">
+                        </div>
+                        <!-- <label for="start_date">Start date</label> -->
+                        <div class="col-md-3 form-group">
+                            <input type="date" class="form-control" id="start-date">
+                        </div>
+                        <div class="form-group col-md-1 justify-content-end">
+                            <button type="submit" id="submit-filter" class="btn">Submit</button>
+                        </div>
+                </form>
             </div>
         </div>
-        <div class="row">
-            <form>
-                <div class="col-md-2 form-group">
-                    <!-- category dropdown -->
-                    <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
-                        <option disable selected>Category</option>
-                        <option value="nightlife">Nightlife</option>
-                        <option value="dining">Dining</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="events">Events</option>
-                    </select>
+        <!-- map & sidebar -->
+        <div class="row row-height">
+            <!-- results panel-->
+            <div class="col-lg-12">
+                <div class='sidebar'>
+                    <div class='heading'>
+                        <!-- sidebar -->
+                        <h1>events near you</h1>
+                    </div>
+                    <div id='listings' class='listings'></div>
                 </div>
-                <!-- dropdown for city selection -->
-                <div class="col-md-2 form-group">
-                    <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
-                        <option disable selected>City</option>
-                        <option value="Boston">Boston</option>
-                        <option value="Brookline">Brookline</option>
-                        <option value="Cambridge">Cambridge</option>
-                        <option value="Medford">Medford</option>
-                        <option value="Milton">Milton</option>
-                        <option value="Quincy">Quincy</option>
-                        <option value="Somerville">Somerville</option>
-                        <option value="Woburn">Woburn</option>
-                    </select>
-                </div>
-                <!-- keyword search filter -->
-                <div class="col-md-4 form-group">
-                    <input type="text" class="form-control" id="keywords"
-                        placeholder="Keyword: e.g., Italian, art, dancing">
-                </div>
-                <!-- <label for="start_date">Start date</label> -->
-                <div class="col-md-3 form-group">
-                    <input type="date" class="form-control" id="start-date">
-                </div>
-                <div class="form-group col-md-1 justify-content-end">
-                    <button type="submit" id="submit-filter" class="btn">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- map & sidebar -->
-    <div class="row row-height">
-        <!-- results panel-->
-        <div class="col-lg-12">
-            <div class='sidebar'>
-                <div class='heading'>
-                    <!-- sidebar -->
-                    <h1>events near you</h1>
-                </div>
-                <div id='listings' class='listings'></div>
+                <!-- map div -->
+                <div id='map' class='map pad2'>Map</div>
             </div>
-            <!-- map div -->
-            <div id='map' class='map pad2'>Map</div>
         </div>
-    </div>
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
