@@ -51,7 +51,7 @@ $("#submit-filter").on("click", function (e) {
     startDate = $("#start-date").val();
     startDate = startDate.replace(/-/g, ""); // remove dashes for proper Eventful format
     keywords = $("#keywords").val();
-    console.log(newEvent);
+
     if (newEvent === "fitness" || newEvent === "medical") {
       yelpSelected(newEvent, city);
     }
@@ -81,43 +81,33 @@ function eventfulSelected(newEvent, city) {
         // turning the Eventful string into an object
         response = JSON.parse(response);
 
-        // trying to clear object before next results
-        newStoresList = {};
-
-        // if search returns no results
+        // handling edge case if search returns no results
         if (!response.events) {
           $("#listings").html("<h6>Sorry, no results matched your search. Here are some other great events happening near you!</h6>");
-
+          // reset to dining and Boston just so some results are returned
           newEvent = "dining";
           city = "Boston";
           yelpSelected(newEvent, city);
         }
         // update sidebar title based on selection      
         $(".heading").html("<h1>" + newEvent + " near you</h1>");
-        console.log(response.events);
 
+        // shorten the API response
         let item = response.events;
-        console.log(item);
         
         // reset the latitude and longitude variables
         center_long = 0;
         center_lat = 0;
-        console.log("$$$$$$$$$$$$$$")
-        console.log(item.event.length);
-        console.log("$$$$$$$$$$$$$$")
-
- 
+        
+        // handling results that are fewer than 7 but not 0
         if (item.event.length > 0 && item.event.length < 7) {
-          debugger;
           sidebarLength = item.event.length;
-          console.log("sidebar length " + sidebarLength);
         }
         else {
           sidebarLength = 7;
         }
         // looping through the API response object
         for (let i = 0; i<sidebarLength; i++) {
-            console.log("i= " + i);
             url = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
             name = item.event[i].title;
             latitude = item.event[i].latitude;
@@ -154,12 +144,10 @@ function eventfulSelected(newEvent, city) {
                     }
                   }
             };
-            console.log("**************");
-            console.log(storesDyn);
-            console.log("**************");
             // this does the math to create the latitude/longitude centerpoint 
             center_long = center_long/sidebarLength;
             center_lat = center_lat/sidebarLength;
+            storesDyn = storesDyn.slice(0, sidebarLength);
 
           newStoresList = {
           "type": "FeaturedCollection",
@@ -167,12 +155,7 @@ function eventfulSelected(newEvent, city) {
           "center_long": center_long, // this if we want a dynamic longitude based on search results
           "center_lat": center_lat  // this if we want a dynamic latitude based on search results
         };
-        console.log("!!!!!!!!!!!!!!");
-        console.log(newStoresList);
-        console.log("!!!!!!!!!!!!!!");
 
-        // call the load map function with the dynamic locations list
-        // storesDyn = " ";
         loadMap(newStoresList);
 
     });
@@ -196,9 +179,7 @@ function yelpSelected(newEvent, city) {
     },
     
     }).then(function (response) {
-        console.log(response);
 
-        newStoresList = " ";
     // update sidebar title based on selection 
     $(".heading").html("<h1>" + newEvent + " near you</h1>");
     let item = response.businesses;
@@ -300,7 +281,6 @@ function loadMap(newStoresList) {
 
 // dynamic list of stores 
 stores = newStoresList;
-console.log(stores);
 
   // This adds the data to the map
   map.on('load', function (e) {
@@ -414,8 +394,6 @@ console.log(stores);
       });
     }
   }
-  // storesDyn = " ";
-
 };
 
 // this launches the map for the first time with defaul variables
