@@ -276,10 +276,13 @@ a:hover {
 #start-date {
     /* margin-left: 10%; */
 }
+/* not delete! */
 #vid {
-    margin-top: -180px;
-    margin-bottom: -524px;
+    margin-top: -300px;
+    margin-bottom: -320px;
 }
+
+
 
 #table-margin {
     margin-top: -11px;
