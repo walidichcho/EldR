@@ -1,4 +1,11 @@
 
+
+
+
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section A.1. - Root Page css config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Rock+Salt&display=swap');
 
 * {
@@ -13,6 +20,10 @@ body {
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
+    background: #FFFFFF;
+    background: -moz-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: -webkit-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: linear-gradient(to right, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
 }
 
 /* #nav-bar {
@@ -31,7 +42,11 @@ nav {
     margin: 0px;
 }
 
-/* ======= Section A.1. - Base Button css settings ======= */
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section A.1. - Root Button css config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
 button {
     background-color: #4CAF50;
     display: grid;
@@ -97,7 +112,9 @@ button::before {
     font-size: 36px;
 }
 
-/* ==== Section C.1. - Login button edits ==== */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+        Section C.1. - Login button 
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 #login {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -185,7 +202,9 @@ button::before {
 	width: 120%;
 }
 
-/* ==== Section C.2. - "Sign-Up" button edits ==== */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section C.2. - "Sign-Up" Button config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 #signup {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -203,7 +222,7 @@ button::before {
     cursor: hand;
     text-align: center;
     text-transform: capitalize;
-    border: 1px solid white;
+    border: 1px solid whitesmoke;
     border-radius:50px;
     position: relative;
     overflow: hidden!important;
@@ -212,13 +231,13 @@ button::before {
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     background: transparent!important;
-    z-index:10;  
+    z-index:10; 
     margin-bottom: 75px; 
 }
 
 #signup:hover{
     border: 1px solid #071982;
-      color: whitesmoke!important;
+      color: #0dd3c2!important;
       
 }
 
@@ -227,7 +246,7 @@ button::before {
     width: 0%;
     height: 100%;
     display: block;
-    background: #00c5cf;
+    background: #404040;
     position: absolute;
 	  -ms-transform: skewX(-20deg);
     -webkit-transform: skewX(-20deg); 
@@ -248,7 +267,7 @@ button::before {
     width: 0%;
     height: 100%;
     display: block;
-    background: darkslategrey;
+    background: #80ffd3;
     position: absolute;
 	-ms-transform: skewX(-20deg);
     -webkit-transform: skewX(-20deg); 
@@ -289,7 +308,27 @@ h2 {
     
 }
 
-/* ======= BELOW ARE THE STYLES FOR THE MAP ======= */
+#category {
+    padding-right: -20px;
+    
+    
+}
+
+#category-list {
+    padding-right: -20px;
+    padding: 0px;
+}
+
+.weather-container {
+    background-color: lightgray;
+    padding: 15px;
+    text-align: center;
+    ;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         BELOW ARE THE STYLES FOR THE MAP
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 h1 {
     font-size: 22px;
@@ -356,14 +395,14 @@ a:hover {
 
 .listings .item .title {
     display: block;
-    color: #00853e;
+    color: #60d2d5;
     font-weight: 700;
 }
 
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #8cc63f; }
+.listings .item .title:hover { color: teal; }
 
 .listings .item.active {
     background-color: #f8f8f8;
@@ -381,7 +420,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #00853e;
+    background: #60d2d5;
     border-radius: 0;
 }
 
@@ -411,7 +450,7 @@ a:hover {
 }
 
 .mapboxgl-popup-content h3 {
-    background: #91c949;
+    background: #60d2d5;
     color: #fff;
     margin: 0;
     display: block;
@@ -443,7 +482,7 @@ a:hover {
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-    border-bottom-color: #91c949;
+    border-bottom-color: #60d2d5;
 }
 
 .mapboxgl-popup {
@@ -466,7 +505,8 @@ a:hover {
 }
 
 .form-group {
-    float: left;
+    float: none;
+    padding-right: -20px;
 }
 
 .container {
@@ -474,7 +514,7 @@ a:hover {
 }
 
 #submit-filter {
-    margin-top: 20px;
+    margin-top: 0px;
 
 }
 
@@ -484,12 +524,22 @@ a:hover {
 }
 
 #start-date {
-    margin-left: 10%;
+    margin-left: 0%;
 }
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+       Video / .mp4 File
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 /* not delete! */
 #vid {
     margin-top: -300px;
     margin-bottom: -320px;
+    /* width: 100%;
+    padding-bottom: 66%; */
+}
+
+#vidDiv {
+    padding-bottom: -4000px;
 }
 
 /* ======= Links ======= */
@@ -505,7 +555,14 @@ a {
     margin-bottom: -16px;
 }
 
-/* ======= footer button ======= */
+
+
+
+
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+       Footer-Button 
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 .btn {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -567,7 +624,7 @@ a {
     width: 0%;
     height: 100%;
     display: block;
-    background: darkslategrey;
+    background: #80ffd3;
     position: absolute;
 	-ms-transform: skewX(-20deg);
     -webkit-transform: skewX(-20deg); 
