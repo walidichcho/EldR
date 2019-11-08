@@ -1,7 +1,8 @@
 $(document).ready(function() { 
 
-// create map variables
+// create universal variables
 let storesDyn = [];
+let newStoresList = {};
 let newEvent = "dining";
 let phone;
 let url;
@@ -13,6 +14,7 @@ let keywords = "Italian";
 let state;
 let zipcode;
 let name;
+let sidebarLength;
 let center_long = 0;
 let center_lat = 0;
 
@@ -54,13 +56,13 @@ $("#submit-filter").on("click", function (e) {
       yelpSelected(newEvent, city);
     }
     else {
-      eventfulSelected()
+      eventfulSelected(newEvent, city)
     }
 
 });
 
 // this is the Eventful function. I wasn't able to DRY it up because it's slightly different coming from the buttons vs. the filter
-function eventfulSelected(newEvent) {
+function eventfulSelected(newEvent, city) {
     
     // set the Eventful API variable. This helps with the CORS issue. We may be able to remove once we publish.
     let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=Boston&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
@@ -78,7 +80,101 @@ function eventfulSelected(newEvent) {
     }).then(function (response) {
         // turning the Eventful string into an object
         response = JSON.parse(response);
-        eventfulList(response)
+
+        // trying to clear object before next results
+        newStoresList = {};
+
+        // if search returns no results
+        if (!response.events) {
+          $("#listings").html("<h6>Sorry, no results matched your search. Here are some other great events happening near you!</h6>");
+
+          newEvent = "dining";
+          city = "Boston";
+          yelpSelected(newEvent, city);
+        }
+        // update sidebar title based on selection      
+        $(".heading").html("<h1>" + newEvent + " near you</h1>");
+        console.log(response.events);
+
+        let item = response.events;
+        console.log(item);
+        
+        // reset the latitude and longitude variables
+        center_long = 0;
+        center_lat = 0;
+        console.log("$$$$$$$$$$$$$$")
+        console.log(item.event.length);
+        console.log("$$$$$$$$$$$$$$")
+
+ 
+        if (item.event.length > 0 && item.event.length < 7) {
+          debugger;
+          sidebarLength = item.event.length;
+          console.log("sidebar length " + sidebarLength);
+        }
+        else {
+          sidebarLength = 7;
+        }
+        // looping through the API response object
+        for (let i = 0; i<sidebarLength; i++) {
+            console.log("i= " + i);
+            url = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
+            name = item.event[i].title;
+            latitude = item.event[i].latitude;
+            longitude = item.event[i].longitude;
+            address = item.event[i].venue_address;
+            city = item.event[i].city_name;
+            state = item.event[i].region_name;
+            zipcode = item.event[i].postal_code;
+            // creating variables for map's new center point
+            center_long = parseFloat(center_long);
+            center_lat = parseFloat(center_lat);
+            center_long += parseFloat(longitude);
+            center_lat += parseFloat(latitude);
+
+              storesDyn[i] = {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        longitude,
+                        latitude,
+                      ]
+                    },
+                    "properties": {
+                      "name": name,
+                      "phoneFormatted": phone,
+                      "phone": phone,
+                      "address": address,
+                      "city": city,
+                      "country": "United States",
+                      "crossStreet": " ",
+                      "postalCode": zipcode,
+                      "state": state
+                    }
+                  }
+            };
+            console.log("**************");
+            console.log(storesDyn);
+            console.log("**************");
+            // this does the math to create the latitude/longitude centerpoint 
+            center_long = center_long/sidebarLength;
+            center_lat = center_lat/sidebarLength;
+
+          newStoresList = {
+          "type": "FeaturedCollection",
+          "features": storesDyn,
+          "center_long": center_long, // this if we want a dynamic longitude based on search results
+          "center_lat": center_lat  // this if we want a dynamic latitude based on search results
+        };
+        console.log("!!!!!!!!!!!!!!");
+        console.log(newStoresList);
+        console.log("!!!!!!!!!!!!!!");
+
+        // call the load map function with the dynamic locations list
+        // storesDyn = " ";
+        loadMap(newStoresList);
+
     });
 
 }
@@ -102,17 +198,10 @@ function yelpSelected(newEvent, city) {
     }).then(function (response) {
         console.log(response);
 
-        yelpList(response)
-    });
-
-}
-
-// this is the Yelp search function
-function yelpList(data) {
-
+        newStoresList = " ";
     // update sidebar title based on selection 
     $(".heading").html("<h1>" + newEvent + " near you</h1>");
-    let item = data.businesses;
+    let item = response.businesses;
     // reset the latitude and longitude variables
     center_long = 0;
     center_lat = 0;
@@ -164,80 +253,19 @@ function yelpList(data) {
             center_lat = center_lat/7;
 
             // this creates the object in the format that the map likes                
-            let newStoresList = {
+            newStoresList = {
             "type": "FeaturedCollection",
             "features": storesDyn,
             "center_long": center_long,
             "center_lat": center_lat
         };
         // call the function that populates the map
+        // storesDyn = " ";
         loadMap(newStoresList);
-    
-    }
 
-    function eventfulList(data) {
+    });
 
-        // update sidebar title based on selection      
-        $(".heading").html("<h1>" + newEvent + " near you</h1>");
-        let item = data.events;
-        // reset the latitude and longitude variables
-        center_long = 0;
-        center_lat = 0;
-
-        // looping through the API response object
-        for (let i = 0; i<7; i++) {
-
-            url = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
-            name = item.event[i].title;
-            latitude = item.event[i].latitude;
-            longitude = item.event[i].longitude;
-            address = item.event[i].venue_address;
-            city = item.event[i].city_name;
-            state = item.event[i].region_name;
-            zipcode = item.event[i].postal_code;
-            // creating variables for map's new center point
-            center_long = parseFloat(center_long);
-            center_lat = parseFloat(center_lat);
-            center_long += parseFloat(longitude);
-            center_lat += parseFloat(latitude);
-
-              storesDyn[i] = {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [
-                        longitude,
-                        latitude,
-                      ]
-                    },
-                    "properties": {
-                      "name": name,
-                      "phoneFormatted": phone,
-                      "phone": phone,
-                      "address": address,
-                      "city": city,
-                      "country": "United States",
-                      "crossStreet": " ",
-                      "postalCode": zipcode,
-                      "state": state
-                    }
-                  }
-            };
-            // this does the math to create the latitude/longitude centerpoint 
-            center_long = center_long/7;
-            center_lat = center_lat/7;
-
-          let newStoresList = {
-          "type": "FeaturedCollection",
-          "features": storesDyn,
-          "center_long": center_long, // this if we want a dynamic longitude based on search results
-          "center_lat": center_lat  // this if we want a dynamic latitude based on search results
-        };
-
-        // call the load map function with the dynamic locations list
-        loadMap(newStoresList);
-    
-    }
+}
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 // BELOW IS EVERYTHING HAVING TO DO WITH THE MAP FUNCTIONALITY //
@@ -272,6 +300,7 @@ function loadMap(newStoresList) {
 
 // dynamic list of stores 
 stores = newStoresList;
+console.log(stores);
 
   // This adds the data to the map
   map.on('load', function (e) {
@@ -385,6 +414,8 @@ stores = newStoresList;
       });
     }
   }
+  // storesDyn = " ";
+
 };
 
 // this launches the map for the first time with defaul variables
