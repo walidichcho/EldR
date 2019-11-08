@@ -280,7 +280,7 @@ function loadMap(newStoresList) {
     center: [-71.0589, 42.3601],
     // initial zoom
     zoom: 11,
-    scrollZoom: true
+    scrollZoom: false
   });
 
   // enable map zoom controls
