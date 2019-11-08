@@ -25,21 +25,27 @@
 
 </head>
 
-<nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-info">
-
-    <a class="navbar-brand" href="index.html">EldR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <button type="submit" id="login" class=" btn btn-primary" value="login"> Login
-    </button>
-    <button type="submit" id="signup" class=" btn btn-primary" value="signup"> Sign UP
-    </button>
-
-</nav>
 
 <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-info">
+
+                    <a class="navbar-brand" href="index.html">EldR</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <button type="submit" id="login" class=" btn btn-primary" value="login"> Login
+                    </button>
+                    <button type="submit" id="signup" class=" btn btn-primary" value="signup"> Sign UP
+                    </button>
+
+                </nav>
+
+            </div>
 
     <div class="row">
         <div class="col-md-9">
@@ -58,6 +64,8 @@
             <button type="submit" id="events" class="user-selection btn btn-info" value="events">
                 Events </button>
         </div>
+
+
     </div>
     <!-- filter search bar -->
     <div class="container">
@@ -107,6 +115,119 @@
             </form>
         </div>
     </div>
+    <!-- map & sidebar -->
+    <div class="row row-height">
+        <!-- results panel-->
+        <div class="col-lg-12">
+            <div class='sidebar'>
+                <div class='heading'>
+                    <!-- sidebar -->
+                    <h1>events near you</h1>
+                </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <iframe width="2150" height="560" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1"
+                    width="2000" height="500" frameborder="0" allowfullscreen>
+                </iframe>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 bg-info">
+                <button type="submit" id="nightlife" class="user-selection btn btn-info" value="nightlife">
+                    Nightlife
+                </button>
+                <button type="submit" id="dining" class="user-selection btn btn-info" value="dining"> Dining
+                </button>
+                <button type="submit" id="fitness" class="user-selection btn btn-info" value="fitness"> Fitness
+                </button>
+                <button type="submit" id="events" class="user-selection btn btn-info" value="events">
+                    Events </button>
+                <button type="submit" id="sports" class="user-selection btn btn-info" value="sports">
+                    Sports </button>
+                <button type="submit" id="services" class="user-selection btn btn-info" value="services">
+                    Services </button>
+                <button type="submit" id="medical" class="user-selection btn btn-info" value="medical">Medical </button>
+            </div>
+
+            <div class="col-md-8 bg-info">
+                <!-- filter search bar -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 filter-title">
+                            Refine your search
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form>
+                            <div class="col-md-6 form-group">
+                                <!-- category dropdown -->
+                                <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                                    <option disable selected>Category</option>
+                                    <option value="nightlife">Nightlife</option>
+                                    <option value="dining">Dining</option>
+                                    <option value="fitness">Fitness</option>
+                                    <option value="events">Events</option>
+                                    <option value="sports">Sports</option>
+                                    <option value="services">Services</option>
+                                    <option value="medical">Medical</option>
+                                </select>
+                            </div>
+
+
+                    </div>
+                    <div class="row">
+                        <!-- dropdown for city selection -->
+                        <div class="col-md-12 form-group">
+                            <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                                <option disable selected>City</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Brookline">Brookline</option>
+                                <option value="Cambridge">Cambridge</option>
+                                <option value="Medford">Medford</option>
+                                <option value="Milton">Milton</option>
+                                <option value="Quincy">Quincy</option>
+                                <option value="Somerville">Somerville</option>
+                                <option value="Woburn">Woburn</option>
+                            </select>
+                        </div>
+                        <!-- keyword search filter -->
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="keywords"
+                                placeholder="Keyword: e.g., Italian, art, dancing">
+                        </div>
+                        <!-- <label for="start_date">Start date</label> -->
+                        <div class="col-md-12 form-group">
+                            <input type="date" class="form-control" id="start-date">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8 justify-content-end">
+                            <button type="submit" id="submit-filter" class="btn">Submit</button>
+                        </div>
+                    </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
     <!-- map & sidebar -->
     <div class="row row-height">
         <!-- results panel-->
