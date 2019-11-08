@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- load mapbox js and css -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
     <!-- <meta http-equiv="refresh" content="5" /> -->
     <title>Eldr</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Firebase References -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
@@ -16,13 +20,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
-    <script src="./assets/javascript/appjs.js"></script>
+    <script src="./assets/javascript/app.js" defer></script>
 
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-info">
 
     <a class="navbar-brand" href="index.html">EldR</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -42,7 +45,7 @@
         <div class="col-md-9">
             <video id="vid" width="1920" height="1080" loop autoplay muted>
                     <!-- MP4 must be first for iPad! -->
-                    <source src="./assets/video/Video Idosos.mp4" type="video/mp4" /><!-- Safari / iOS video    -->
+                    <source src="./assets/images/videoBanner.mp4" type="video/mp4" /><!-- Safari / iOS video    -->
              </video>
             <!-- <img src="./assets/images/banner2.png"> -->
         </video>
@@ -55,38 +58,72 @@
             </button>
             <button type="submit" id="fitness" class="user-selection btn btn-info" value="fitness"> Fitness
             </button>
-            <button type="submit" id="entertainment" class="user-selection btn btn-info" value="entertainment">
-                Entertainment </button>
+            <button type="submit" id="events" class="user-selection btn btn-info" value="events">
+                Events </button>
         </div>
     </div>
-
-    <!-- table -->
-    <div class="row">
-        <!-- results panel-->
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title bg-info">Events</h2>
-                </div>
-                <div id="table-margin" class="panel-body bg-success">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Event</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Website</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+    <!-- filter search bar -->
+        <div class="container">
+            <div class ="row">
+                <div class="col-lg-12 filter-title">
+                    Refine your search
                 </div>
             </div>
+            <div class ="row">
+                <form>
+                    <div class="col-md-2 form-group">
+                        <!-- category dropdown -->
+                        <select id="category-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                            <option disable selected>Category</option>
+                            <option value="nightlife">Nightlife</option>
+                            <option value="dining">Dining</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="events">Events</option>
+                        </select>
+                    </div>
+                            <!-- dropdown for city selection -->
+                            <div class="col-md-2 form-group">
+                            <select id="city-list" class="custom-select" aria-labelledby="dropdownMenuButton">
+                                <option disable selected>City</option>
+                                <option value="Boston">Boston</option>
+                                <option value="Brookline">Brookline</option>
+                                <option value="Cambridge">Cambridge</option>
+                                <option value="Medford">Medford</option>
+                                <option value="Milton">Milton</option>
+                                <option value="Quincy">Quincy</option>
+                                <option value="Somerville">Somerville</option>
+                                <option value="Woburn">Woburn</option>
+                            </select>
+                        </div>
+                        <!-- keyword search filter -->
+                        <div class="col-md-4 form-group">
+                                <input type="text" class="form-control" id="keywords" placeholder="Keyword: e.g., Italian, art, dancing">
+                        </div>
+                        <!-- <label for="start_date">Start date</label> -->
+                        <div class="col-md-3 form-group">
+                            <input type="date" class="form-control" id="start-date">
+                        </div>
+                        <div class="form-group col-md-1 justify-content-end">
+                            <button type="submit" id="submit-filter" class="btn">Submit</button>
+                        </div>
+                </form>
+            </div>
         </div>
-    </div>
-
-
+        <!-- map & sidebar -->
+        <div class="row row-height">
+            <!-- results panel-->
+            <div class="col-lg-12">
+                <div class='sidebar'>
+                    <div class='heading'>
+                        <!-- sidebar -->
+                        <h1>events near you</h1>
+                    </div>
+                    <div id='listings' class='listings'></div>
+                </div>
+                <!-- map div -->
+                <div id='map' class='map pad2'>Map</div>
+            </div>
+        </div>
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -127,29 +164,6 @@
 
                     </div>
                 </div>
-<!-- 
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="jumbotron jumbotron-fluid text-center bg-white border border-secondary">
-                            <div class="container">
-                                <h1 class="display-5">Discover:</h1>
-                                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space
-                                    of its parent.</p>
-                                <a href="#" class="btn btn-info">Join EldR ⟹</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="jumbotron jumbotron-fluid text-center bg-white border border-secondary">
-                            <div class="container">
-                                <h1 class="display-5">Connect with others:</h1>
-                                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space
-                                    of its parent.</p>
-                                <a href="#" class="btn btn-info">Connect on EldR ⟹</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
             </div>
 
