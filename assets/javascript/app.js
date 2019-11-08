@@ -4,6 +4,7 @@ $(document).ready(function() {
 let storesDyn = [];
 let newEvent = "dining";
 let phone;
+let url;
 let latitude;
 let longitude;
 let address;
@@ -19,67 +20,42 @@ let center_lat = 0;
 let startDate = moment().format('YYYY-MM-DD');
 startDate = startDate.replace(/-/g, ""); // removes dashes for proper Eventful format
 
-// click event for sidebar buttons
-$(".user-selection").on("click", function (e) {
-    // resets logitude and latitude variables
-    center_long = 0;
-    center_lat = 0;
-    // clear the table
-    $("#listings").html(" ");
-    $("#map").html(" ");
-    e.preventDefault();
-    // if user select 
-    newEvent = $(this).val();
-    // if the user selects "events" initially we add "art" as the keyword search term, just to populate the table for the first time
-    if (newEvent === "events") {
-        newEvent = "art";
-        // the events button controls the Eventful API so this function launches the Eventful API
-        eventfulSelected(newEvent);
-    }
-    // if they choose one of the other 3 buttons it launches the Yelp API
-    else {
-        yelpSelected(newEvent);
-    }
+// hides date field
+$("#start-date").hide();
 
+// function to display date field based on category selection (don't need a date field for medical, fitness)
+$("#category-list").on("change", function() {
+  console.log($(this).val());
+  if ($(this).val() === "events" || $(this).val() === "nightlife" || $(this).val() === "dining")
+  {
+    $("#start-date").show();
+  }
+  else
+  {
+    $("#start-date").hide();
+  }
 });
 
 // this handles the filter click events
 $("#submit-filter").on("click", function (e) {
-    $("#image-holder").html("<img src='assets/images/loading.gif'>");
-
-
-    // TODO: Use a setTimeout to run displayImage after 1 second.
-    // setTimeout(displayImage, 1000);
-    // clear the table
+    // clear the sidebar & map
     $("#listings").html(" ");
     $("#map").html(" ");
     e.preventDefault();
+
     // update the variables with the value of the button clicked
     city = $("#city-list").val();
     newEvent = $("#category-list").val();
     startDate = $("#start-date").val();
     startDate = startDate.replace(/-/g, ""); // remove dashes for proper Eventful format
     keywords = $("#keywords").val();
-
-    // create the Eventful API variable
-    let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=Boston&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
-
-  $.ajax({
-    url: apiEventful,
-    method: "GET",
-    headers: {
-        "accept": "application/json",
-        "x-requested-with": "xmlhttprequest",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Bearer VqZqgUX2qboPwa-PUY_ZeLscFpp23iDTB7vFF4T6PKTfjFXNSOM8hpsoJmdnKeMGbXiYPmAuZLzGNVEkuUImrrICCSouTCpoALIBX7gaYV8-vDj_OvlCAbWpKsLAXXYx"
-    },
-
-    }).then(function (response) {
-        // Eventful returns a string so this turns it into an object
-        response = JSON.parse(response);
-        // launch the Eventful API
-        eventfulList(response)
-    });
+    console.log(newEvent);
+    if (newEvent === "fitness" || newEvent === "medical") {
+      yelpSelected(newEvent, city);
+    }
+    else {
+      eventfulSelected()
+    }
 
 });
 
@@ -87,7 +63,7 @@ $("#submit-filter").on("click", function (e) {
 function eventfulSelected(newEvent) {
     
     // set the Eventful API variable. This helps with the CORS issue. We may be able to remove once we publish.
-    let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=" + city + "&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
+    let apiEventful = "https://cors-anywhere.herokuapp.com/http://api.eventful.com/json/events/search?app_key=fQR9v8ZPXs3sbfJH&location=Boston&category=" + newEvent + "&date=" + startDate + "&keywords=" + keywords;
 
   $.ajax({
     url: apiEventful,
@@ -108,10 +84,10 @@ function eventfulSelected(newEvent) {
 }
 
 // this is the function for when someone selects Dining, Nightlife or Fitness
-function yelpSelected(newEvent) {
+function yelpSelected(newEvent, city) {
 
     // Set the Yelp API variable. This helps with the CORS issue. We may be able to remove once we publish.
-    let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=Boston";
+    let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=" + city + ", MA";
 
   $.ajax({
     url: apiYelp,
@@ -134,13 +110,18 @@ function yelpSelected(newEvent) {
 // this is the Yelp search function
 function yelpList(data) {
 
+    // update sidebar title based on selection 
     $(".heading").html("<h1>" + newEvent + " near you</h1>");
     let item = data.businesses;
+    // reset the latitude and longitude variables
+    center_long = 0;
+    center_lat = 0;
 
+      // looping through the API response object
       for (let i = 0; i<7; i++) {
 
             // updating the variables
-            phone = item[i].display_phone;
+            url = "<a href=" + item[i].url + " target='blank'>Website</a>";
             name = item[i].name;
             latitude = item[i].coordinates.latitude;
             longitude = item[i].coordinates.longitude;
@@ -148,7 +129,7 @@ function yelpList(data) {
             city = item[i].location.city;
             state = item[i].location.state;
             zipcode = item[i].location.zip_code;
-            // creating center point for map
+            // creating variables for map's new center point
             center_long = parseFloat(center_long);
             center_lat = parseFloat(center_lat);
             center_long += parseFloat(longitude);
@@ -173,11 +154,11 @@ function yelpList(data) {
                     "country": "United States",
                     "crossStreet": " ",
                     "postalCode": zipcode,
-                    "state": state
-                }
+                    "state": state,
+                    "url": url
+                    }
                 }
             };
-
             // this does the math to create the latitude/longitude centerpoint 
             center_long = center_long/7;
             center_lat = center_lat/7;
@@ -196,14 +177,17 @@ function yelpList(data) {
 
     function eventfulList(data) {
 
+        // update sidebar title based on selection      
         $(".heading").html("<h1>" + newEvent + " near you</h1>");
         let item = data.events;
+        // reset the latitude and longitude variables
         center_long = 0;
         center_lat = 0;
 
+        // looping through the API response object
         for (let i = 0; i<7; i++) {
 
-            phone = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
+            url = "<a href=" + item.event[i].venue_url + " target='blank'>Website</a>";
             name = item.event[i].title;
             latitude = item.event[i].latitude;
             longitude = item.event[i].longitude;
@@ -211,6 +195,7 @@ function yelpList(data) {
             city = item.event[i].city_name;
             state = item.event[i].region_name;
             zipcode = item.event[i].postal_code;
+            // creating variables for map's new center point
             center_long = parseFloat(center_long);
             center_lat = parseFloat(center_lat);
             center_long += parseFloat(longitude);
@@ -238,6 +223,7 @@ function yelpList(data) {
                     }
                   }
             };
+            // this does the math to create the latitude/longitude centerpoint 
             center_long = center_long/7;
             center_lat = center_lat/7;
 
@@ -277,22 +263,12 @@ function loadMap(newStoresList) {
     // style URL
     style: 'mapbox://styles/mapbox/light-v10',
     // initial position in [long, lat] format
-    center: [-71.0589, 42.3601],
+    // center: [-71.0589, 42.3601],
+    center: [center_long, center_lat],
     // initial zoom
     zoom: 11,
     scrollZoom: false
   });
-
-  // enable map zoom controls
-  // map.addControl(new mapboxgl.NavigationControl());
-
-  // geolocation control
-  // map.addControl(new mapboxgl.GeolocateControl({
-  // positionOptions: {
-  // enableHighAccuracy: true
-  // },
-  // trackUserLocation: true
-  // }));
 
 // dynamic list of stores 
 stores = newStoresList;
@@ -322,7 +298,8 @@ stores = newStoresList;
         .addTo(map);
 
     el.addEventListener('click', function(e){
-        // 1. Fly to the point
+
+      // 1. Fly to the point
         flyToStore(marker);
 
         // 2. Close all other popups and display popup for clicked store
@@ -354,12 +331,11 @@ stores = newStoresList;
     let popUps = document.getElementsByClassName('mapboxgl-popup');
     if (popUps[0]) popUps[0].remove();
 
-
     let popup = new mapboxgl.Popup({closeOnClick: false})
           .setLngLat(currentFeature.geometry.coordinates)
           .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
             '<h4>' + currentFeature.properties.address + ' <br />' +
-            currentFeature.properties.city + ', ' + currentFeature.properties.state + ' ' + currentFeature.properties.phone + '<h4>')
+            currentFeature.properties.city + ', ' + currentFeature.properties.state + ' ' + currentFeature.properties.url + '<h4>')
           .addTo(map);
   }
 
@@ -374,7 +350,7 @@ stores = newStoresList;
       listing.id = "listing-" + i;
 
       let link = listing.appendChild(document.createElement('a'));
-      link.href = '#';
+      // link.href = '#';
       link.className = 'title';
       link.dataPosition = i;
       link.innerHTML = prop.name;
@@ -384,8 +360,8 @@ stores = newStoresList;
 
       let details = listing.appendChild(document.createElement('div'));
       details.innerHTML = prop.city;
-      if (prop.phone) {
-        details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+      if (prop.url) {
+        details.innerHTML += ' &middot; ' + prop.url;
       }
 
       link.addEventListener('click', function(e){
@@ -412,6 +388,6 @@ stores = newStoresList;
 };
 
 // this launches the map for the first time with defaul variables
-yelpSelected(newEvent);
+yelpSelected(newEvent, city);
 
 });
