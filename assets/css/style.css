@@ -15,11 +15,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* #nav-bar {
-    padding: 0px;
-    margin: 0px;
-} */
-
 html {
 
     box-sizing: border-box;
@@ -76,6 +71,12 @@ h2 {
     font-weight: bold;
     text-align: center;
     
+}
+
+h6 {
+    padding: 10px;
+    font-size: 16px;
+    color: red;
 }
 
 /* BELOW ARE THE STYLES FOR THE MAP */

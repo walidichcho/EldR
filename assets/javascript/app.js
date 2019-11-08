@@ -28,7 +28,7 @@ $("#start-date").hide();
 // function to display date field based on category selection (don't need a date field for medical, fitness)
 $("#category-list").on("change", function() {
   console.log($(this).val());
-  if ($(this).val() === "events" || $(this).val() === "nightlife" || $(this).val() === "dining")
+  if ($(this).val() === "events" || $(this).val() === "nightlife")
   {
     $("#start-date").show();
   }
@@ -52,7 +52,7 @@ $("#submit-filter").on("click", function (e) {
     startDate = startDate.replace(/-/g, ""); // remove dashes for proper Eventful format
     keywords = $("#keywords").val();
 
-    if (newEvent === "fitness" || newEvent === "medical") {
+    if (newEvent === "fitness" || newEvent === "medical" || newEvent === "dining") {
       yelpSelected(newEvent, city);
     }
     else {
@@ -166,7 +166,7 @@ function eventfulSelected(newEvent, city) {
 function yelpSelected(newEvent, city) {
 
     // Set the Yelp API variable. This helps with the CORS issue. We may be able to remove once we publish.
-    let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=" + city + ", MA";
+    let apiYelp = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + newEvent + "&location=" + city + ", MA&categories=" + keywords;
 
   $.ajax({
     url: apiYelp,
