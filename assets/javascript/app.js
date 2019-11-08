@@ -284,15 +284,15 @@ function loadMap(newStoresList) {
   });
 
   // enable map zoom controls
-  map.addControl(new mapboxgl.NavigationControl());
+  // map.addControl(new mapboxgl.NavigationControl());
 
   // geolocation control
-  map.addControl(new mapboxgl.GeolocateControl({
-  positionOptions: {
-  enableHighAccuracy: true
-  },
-  trackUserLocation: true
-  }));
+  // map.addControl(new mapboxgl.GeolocateControl({
+  // positionOptions: {
+  // enableHighAccuracy: true
+  // },
+  // trackUserLocation: true
+  // }));
 
 // dynamic list of stores 
 stores = newStoresList;
