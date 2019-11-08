@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- load mapbox js and css -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
@@ -10,7 +12,6 @@
     <title>Eldr</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Firebase References -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
@@ -19,9 +20,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
-    <script src="./assets/javascript/app.js"></script>
+    <script src="./assets/javascript/app.js" defer></script>
 
 </head>
 
@@ -43,7 +43,12 @@
 
     <div class="row">
         <div class="col-md-9">
-            <img src="./assets/images/banner2.png">
+            <video id="vid" width="1920" height="1080" loop autoplay muted>
+                    <!-- MP4 must be first for iPad! -->
+                    <source src="./assets/images/videoBanner.mp4" type="video/mp4" /><!-- Safari / iOS video    -->
+             </video>
+            <!-- <img src="./assets/images/banner2.png"> -->
+        </video>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2 bg-info">
