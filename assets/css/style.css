@@ -501,3 +501,68 @@ a {
     opacity: 1;
     width: 120%;
 }
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+       Mobile Phone and Tablet Adjusters 
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+@media only screen and (min-width: 375px) {
+    #vid {
+        width: 980px;
+    }
+
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .col-md-9 {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding: 0px 0px 10px 0px;
+    }
+
+    .card {
+        float: left;
+    }
+
+    #login {
+        margin-left: 350px;
+    }
+    
+    #submit-filter  {
+        margin-left: 120px;
+    }
+}
+
+/* iPad & iPad X */
+
+@media only screen and (min-width: 768px) {
+    #vid {
+        margin-left: -16px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #vid {
+        width: 1024px;
+    }
+
+    #login {
+        margin-left: 450px; 
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    #login {
+        margin-left: 800px;
+    }
+
+    #vid {
+        width: 1366px;
+    }
+    #submit-filter  {
+        margin-left: 230px;
+    }
+}
