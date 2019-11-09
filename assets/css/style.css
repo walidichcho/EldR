@@ -95,10 +95,6 @@ button:hover::before {
 }
 
 
-/* .navbar-brand {
-    font-size: 36px;
-} */
-
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
         Section C.1. - Login button 
 / -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
@@ -122,7 +118,7 @@ button:hover::before {
 
 
 .navbar {
-    margin-top: 6px;
+    margin-top: 25px;
     font-family: 'Rock Salt', cursive;
     border: 2px solid black;
 }
