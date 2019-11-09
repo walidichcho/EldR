@@ -328,7 +328,7 @@ stores = newStoresList;
     });
 
   });
-
+  // change the View
   function flyToStore(currentFeature) {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
