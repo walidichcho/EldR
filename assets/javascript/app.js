@@ -119,7 +119,7 @@ $(document).ready(function () {
       }
       // looping through the API response object
       for (let i = 0; i < sidebarLength; i++) {
-        url = "<a href=" + item.event[i].venue_url + " target='blank'>Learn more</a>";
+        url = "<a id='learn' href=" + item.event[i].venue_url + " target='blank'>Learn more</a>";
         name = item.event[i].title;
         latitude = item.event[i].latitude;
         longitude = item.event[i].longitude;
@@ -203,7 +203,7 @@ $(document).ready(function () {
       for (let i = 0; i < 7; i++) {
 
         // updating the variables
-        url = "<a href=" + item[i].url + " target='blank'>Learn more</a>";
+        url = "<a id='learn' href=" + item[i].url + " target='blank'>Learn more</a>";
         name = item[i].name;
         latitude = item[i].coordinates.latitude;
         longitude = item[i].coordinates.longitude;
