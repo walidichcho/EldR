@@ -3,7 +3,7 @@ $(document).ready(function () {
   // create universal variables
   let storesDyn = [];
   let newStoresList = {};
-  let newEvent = "dining";
+  let newEvent = "Events";
   let phone;
   let url;
   let latitude;
@@ -97,7 +97,7 @@ $(document).ready(function () {
       if (!response.events) {
         $("#listings").html("<h6>Sorry, no results matched your search. Here are some other great events happening near you!</h6>");
         // reset to dining and Boston just so some results are returned
-        newEvent = "dining";
+        newEvent = "Events";
         city = "Boston";
         yelpSelected(newEvent, city);
       }
@@ -192,7 +192,7 @@ $(document).ready(function () {
     }).then(function (response) {
 
       // update sidebar title based on selection 
-      $(".heading").html("<h1>" + newEvent + " near you</h1>");
+      $(".heading").html("<h1>" + newEvent + " Near You</h1>");
       let item = response.businesses;
       // reset the latitude and longitude variables
       center_long = 0;
