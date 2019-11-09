@@ -193,7 +193,7 @@ $(document).ready(function () {
     }).then(function (response) {
 
       // update sidebar title based on selection 
-      $(".heading").html("<h1>" + newEvent + " Near You</h1>");
+      $(".heading").html("<h1>" + newEvent + " near you</h1>");
       let item = response.businesses;
       // reset the latitude and longitude variables
       center_long = 0;
