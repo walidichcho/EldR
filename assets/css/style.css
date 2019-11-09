@@ -506,9 +506,7 @@ a {
        Mobile Phone and Tablet Adjusters 
 / -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 @media only screen and (min-width: 375px) {
-    #vid {
-        width: 980px;
-    }
+
 
     .row {
         margin-left: 0px;
@@ -539,15 +537,11 @@ a {
 /* iPad & iPad X */
 
 @media only screen and (min-width: 768px) {
-    #vid {
-        margin-left: -16px;
-    }
+   
 }
 
 @media only screen and (min-width: 1024px) {
-    #vid {
-        width: 1024px;
-    }
+    
 
     #login {
         margin-left: 450px; 
@@ -559,9 +553,7 @@ a {
         margin-left: 800px;
     }
 
-    #vid {
-        width: 1366px;
-    }
+    
     #submit-filter  {
         margin-left: 230px;
     }
