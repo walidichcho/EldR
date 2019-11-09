@@ -3,7 +3,7 @@ $(document).ready(function () {
   // create universal variables
   let storesDyn = [];
   let newStoresList = {};
-  let newEvent = "Events";
+  let newEvent = "events";
   let phone;
   let url;
   let latitude;
@@ -28,7 +28,7 @@ $(document).ready(function () {
   // function to display date field based on category selection (don't need a date field for medical, fitness)
   $("#category-list").on("change", function () {
     console.log($(this).val());
-    if ($(this).val() === "events" || $(this).val() === "nightlife") {
+    if ($(this).val() === "events") {
       $("#start-date").show();
     } else {
       $("#start-date").hide();
@@ -49,7 +49,7 @@ $(document).ready(function () {
     startDate = startDate.replace(/-/g, ""); // remove dashes for proper Eventful format
     keywords = $("#keywords").val();
 
-    if (newEvent === "fitness" || newEvent === "medical" || newEvent === "dining") {
+    if (newEvent === "fitness" || newEvent === "medical" || newEvent === "dining" || newEvent === "nightlife") {
       yelpSelected(newEvent, city);
     } else {
       eventfulSelected(newEvent, city)
@@ -151,7 +151,8 @@ $(document).ready(function () {
             "country": "United States",
             "crossStreet": " ",
             "postalCode": zipcode,
-            "state": state
+            "state": state,
+            "url": url
           }
         }
       };
