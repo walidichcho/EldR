@@ -1,0 +1,81 @@
+body {
+    color: #404040;
+    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    background: #FFFFFF;
+    background: -moz-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: -webkit-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: linear-gradient(to right, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    }
+
+    a {
+        color: #F2F2F2;
+    }
+
+    .login-page {
+        width: 360px;
+        padding: 10% 0 0;
+        margin: auto;
+    }
+
+    .form {
+        position: initial;
+        z-index: 1;
+        background: rgba(7, 40, 195, 0.8);
+        width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+    }
+
+    input {
+        font-family: 'Times New Roman', Times, serif;
+        outline: 1;
+        background: #F2F2F2;
+        width: 100%;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        border: 0;
+    }
+
+    #addmemberbtn {
+        outline: 0;
+        background: #4CAF4C;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .message {
+        margin: 15px 0 0;
+        color: aliceblue;
+        font-size: 12px;
+    }
+
+    .message a {
+        color: #4CAF4C;
+        text-decoration: none;
+    }
+
+    .register-form {
+        display: none;
+    }
+
+    div#topNav.container-fluid {
+        justify-content: center;
+    }
+
+    #logoImg {
+        margin-top: 80px;
+        margin-left: 620px;
+    }
+
+    .login-page {
+        padding-top: 20px;
+    }

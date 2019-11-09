@@ -115,8 +115,6 @@ button:hover::before {
 
 }
 
-
-
 .navbar {
     margin-top: 35px;
     font-family: 'Rock Salt', cursive;
@@ -148,7 +146,6 @@ h2 {
 
 #category {
     padding-right: -20px;
-
 
 }
 
@@ -256,6 +253,14 @@ a:hover {
 
 .listings .item.active {
     background-color: #f8f8f8;
+}
+
+div.container-fluid.bg-info {
+    margin-top: 20px;
+}
+
+div.col-md-12.filter-title {
+    color: white;
 }
 
 ::-webkit-scrollbar {
@@ -380,6 +385,14 @@ a:hover {
     margin-left: 0%;
 }
 
+#category-list.custom-select {
+    padding-left: 12px;
+}
+
+ul.text-white {
+    padding-left: 15px;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
        Video / .mp4 File
 / -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
@@ -401,17 +414,10 @@ a {
     color: whitesmoke;
 }
 
-
-
 #table-margin {
     margin-top: -11px;
     margin-bottom: -16px;
 }
-
-
-
-
-
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
        Footer-Button 
