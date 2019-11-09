@@ -1,4 +1,11 @@
 
+
+
+
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section A.1. - Root Page css config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Rock+Salt&display=swap');
 
 * {
@@ -13,7 +20,12 @@ body {
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
+    background: #FFFFFF;
+    background: -moz-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: -webkit-linear-gradient(left, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
+    background: linear-gradient(to right, #FFFFFF 0%, #9BEFE9 38%, #60D2D5 100%);
 }
+
 
 html {
 
@@ -26,8 +38,13 @@ nav {
     margin: 0px;
 }
 
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section A.1. - Root Button css config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
 button {
-    background-color: #60d2d5;
+    background-color: #4CAF50;
     display: grid;
     color: white;
     text-align: center;
@@ -42,20 +59,235 @@ button {
     text-align: center;
 }
 
+button {
+    padding: 15px 100px;
+    margin:10px 4px;
+    color: #fff;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    display:inline-block;
+    
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: 0px;
+    width: 100%;
+    height: 1px;
+    background: #6098FF;
+    display: block;
+    -webkit-transform-origin: left top;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scale(0, 1);
+    -ms-transform: scale(0, 1);
+    transform: scale(0, 1);
+    -webkit-transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
+    transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
+    
+    
+  }
+
+  button:hover::before {
+    -webkit-transform-origin: right top;
+    -ms-transform-origin: right top;
+    transform-origin: right top;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1)
+  }
+
+
+
 .navbar-brand {
     font-size: 36px;
 }
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+        Section C.1. - Login button 
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 #login {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-left: 70%;
     
 }
+
+#login {
+    top: 40px;
+    font-family: "proxima-nova", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase!important;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: hand;
+    text-align: center;
+    text-transform: capitalize;
+    border: 1px solid whitesmoke;
+    border-radius:50px;
+    position: relative;
+    overflow: hidden!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: transparent!important;
+    z-index:10; 
+    margin-bottom: 75px; 
+}
+
+#login:hover{
+    border: 1px solid #071982;
+      color: #0dd3c2!important;
+      
+}
+
+#login::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #404040;
+    position: absolute;
+	  -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 1;
+    top: 0;
+    z-index: -12;
+    -moz-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -o-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -webkit-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+	   box-shadow:2px 0px 14px rgba(0,0,0,.6);
+  } 
+
+#login::after {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #80ffd3;
+    position: absolute;
+	-ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 0;
+    top: 0;
+    z-index: -15;
+    -webkit-transition: all .94s cubic-bezier(.2,.95,.57,.99);
+    -moz-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    -o-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    box-shadow: 2px 0px 14px rgba(0,0,0,.6);
+}
+#login:hover::before, #login:hover::before{
+	opacity:1;
+	width: 116%;
+}
+#login:hover::after, #login:hover::after{
+	opacity:1;
+	width: 120%;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         Section C.2. - "Sign-Up" Button config
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
 #signup {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
        
 }
+
+#signup {
+    top: 40px;
+    font-family: "proxima-nova", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase!important;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: hand;
+    text-align: center;
+    text-transform: capitalize;
+    border: 1px solid whitesmoke;
+    border-radius:50px;
+    position: relative;
+    overflow: hidden!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: transparent!important;
+    z-index:10; 
+    margin-bottom: 75px; 
+}
+
+#signup:hover{
+    border: 1px solid #071982;
+      color: #0dd3c2!important;
+      
+}
+
+#signup::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #404040;
+    position: absolute;
+	  -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 1;
+    top: 0;
+    z-index: -12;
+    -moz-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -o-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -webkit-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+	   box-shadow:2px 0px 14px rgba(0,0,0,.6);
+  } 
+
+#signup::after {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #80ffd3;
+    position: absolute;
+	-ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 0;
+    top: 0;
+    z-index: -15;
+    -webkit-transition: all .94s cubic-bezier(.2,.95,.57,.99);
+    -moz-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    -o-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    box-shadow: 2px 0px 14px rgba(0,0,0,.6);
+}
+#signup:hover::before, #signup:hover::before{
+	opacity:1;
+	width: 116%;
+}
+#signup:hover::after, #signup:hover::after{
+	opacity:1;
+	width: 120%;
+}
 .navbar {
+    margin-top: 6px;
     font-family: 'Rock Salt', cursive;
     border: 2px solid black;
 }
@@ -73,13 +305,28 @@ h2 {
     
 }
 
-h6 {
-    padding: 10px;
-    font-size: 16px;
-    color: red;
+#category {
+    padding-right: -20px;
+    
+    
 }
 
-/* BELOW ARE THE STYLES FOR THE MAP */
+#category-list {
+    padding-right: -20px;
+    padding: 0px;
+}
+
+.weather-container {
+    margin-top: 53px;
+    background-color: lightgray;
+    padding: 15px;
+    text-align: center;
+    ;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+         BELOW ARE THE STYLES FOR THE MAP
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 h1 {
     font-size: 22px;
@@ -92,7 +339,6 @@ h1 {
 a {
     color: #404040;
     text-decoration: none;
-    cursor: pointer; /* keep this on merge, need it after I removed the href */
 }
 
 a:hover {
@@ -154,7 +400,7 @@ a:hover {
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #60d2d5; }
+.listings .item .title:hover { color: teal; }
 
 .listings .item.active {
     background-color: #f8f8f8;
@@ -234,7 +480,7 @@ a:hover {
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-    border-bottom-color: #91c949;
+    border-bottom-color: #60d2d5;
 }
 
 .mapboxgl-popup {
@@ -257,7 +503,8 @@ a:hover {
 }
 
 .form-group {
-    float: left;
+    float: none;
+    padding-right: -20px;
 }
 
 .container {
@@ -265,7 +512,8 @@ a:hover {
 }
 
 #submit-filter {
-    margin: 0px;
+    margin-top: 0px;
+
 }
 
 .filter-title {
@@ -274,12 +522,28 @@ a:hover {
 }
 
 #start-date {
-    /* margin-left: 10%; */
+    margin-left: 0%;
 }
-/* not delete! */
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+       Video / .mp4 File
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
 #vid {
-    margin-top: -300px;
-    margin-bottom: -320px;
+    margin-top: -327px;
+    margin-bottom: -306px;
+    margin-left: -32px;
+    
+}
+
+#vidDiv {
+    padding-bottom: -4000px;
+}
+
+/* ======= Links ======= */
+
+a {
+    color: whitesmoke;
 }
 
 
@@ -289,3 +553,95 @@ a:hover {
     margin-bottom: -16px;
 }
 
+
+
+
+
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= /
+       Footer-Button 
+/ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
+.btn {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+       
+}
+
+.btn {
+    top: 40px;
+    font-family: "proxima-nova", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase!important;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: hand;
+    text-align: center;
+    text-transform: capitalize;
+    border: 1px solid whitesmoke;
+    border-radius:50px;
+    position: relative;
+    overflow: hidden!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: transparent!important;
+    z-index:10; 
+    margin-bottom: 75px; 
+}
+
+.btn:hover{
+    border: 1px solid #071982;
+    color: #0dd3c2!important;
+}
+
+.btn::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #404040;
+    position: absolute;
+	  -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 1;
+    top: 0;
+    z-index: -12;
+    -moz-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -o-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  -webkit-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+	   box-shadow:2px 0px 14px rgba(0,0,0,.6);
+  } 
+
+.btn::after {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #80ffd3;
+    position: absolute;
+	-ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 0;
+    top: 0;
+    z-index: -15;
+    -webkit-transition: all .94s cubic-bezier(.2,.95,.57,.99);
+    -moz-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    -o-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    box-shadow: 2px 0px 14px rgba(0,0,0,.6);
+}
+.btn:hover::before, #signup:hover::before{
+	opacity:1;
+	width: 116%;
+}
+.btn:hover::after, #signup:hover::after{
+	opacity:1;
+	width: 120%;
+}
