@@ -398,15 +398,18 @@ ul.text-white {
 / -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 
 #vid {
-    margin-top: -406px;
-    margin-bottom: -384px;
-    margin-left: -83px;
+    margin-top: -198px;
+    margin-left: 3px;
 
 }
 
+#totalBody {
+    margin-top: -427px;
+}
+/* 
 #vidDiv {
     padding-bottom: -4000px;
-}
+} */
 
 /* ======= Links ======= */
 

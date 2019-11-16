@@ -70,7 +70,13 @@
   :: embed-responsive embed-responsive-16by9 :: that is a class from bootstrap, however, it causes a huge gap between the video and the MAP. 
     //-->
     
-    <div class="container">
+    <div class="embed-responsive embed-responsive-16by9">
+        <video id="vid"  autoplay loop muted class="embed-responsive-item">
+            <source src="./assets/images/VideoBanner.mov" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- <div class="container">
         <div class="row">
             <div id="vidDiv" class="col-md-12">
                 <video id="vid" width="1310" height="1080" loop autoplay muted>
@@ -78,7 +84,7 @@
                 </video>
             </div>
         </div>
-    </div>
+    </div> -->
 
     
 
@@ -88,7 +94,7 @@
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 
     <div class="container-fluid bg-info">
-        <div class="row">
+        <div id="totalBody" class="row">
             <div class="col-md-2"></div>
             <div class="col-md-7">
                 <div class="col-md-12 filter-title">
