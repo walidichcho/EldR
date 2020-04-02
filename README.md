@@ -19,6 +19,9 @@ In the project we tried to make easy and simple for elderly people, some easy fa
 4. Avoid Complex Navigational Elements
 5. Images and videos.
 
+## Website:
+https://rubinholima.github.io/EldR/
+
 
 
 
