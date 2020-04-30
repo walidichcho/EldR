@@ -1,5 +1,4 @@
 # EldR
-Project EldR - HB
 
 ELDR Project
 
